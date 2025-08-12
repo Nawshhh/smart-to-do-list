@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Background from "../components/Background";
 
 function AskName() {
   const [input, setInput] = useState("");
@@ -16,9 +17,11 @@ function AskName() {
         }
     })
   };
-  
+
+
+
   return (
-      <div className="bg-[#282828] h-screen w-screen flex flex-col items-center justify-center gap-3">
+    <Background>
         <p className="font-helvetica font-bold text-white  text-[25px]">What should we call you?</p>
         <input 
           type="text" 
@@ -29,10 +32,10 @@ function AskName() {
           onKeyDown={(e) => e.key == "Enter" && saveAndGo()}
           className="w-[355px] h-[48px] bg-[#545454] rounded-[30px] px-[20px] py-[12px] 
           focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]
-          font-helvetica text-white" 
+          font-helvetica text-white mt-[12px]" 
           placeholder="Name"
         />
-      </div>
+    </Background>
   );
 }
 
