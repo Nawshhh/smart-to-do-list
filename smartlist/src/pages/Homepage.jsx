@@ -8,13 +8,15 @@ import StatusColumns from '../components/StatusColumns';
 
 function Homepage() {
     const { state } = useLocation();
-    const user_name = state.user_name;
+    const user_name = state?.user_name || 'User';
     if (!user_name) return null;
 
     return (
         <Background>
-            <Header name={user_name} />
-            <NavigationBar/>
+            <Header name={user_name} 
+                    statement={"These are your list of things to do"} 
+                    expression={'.'}/>
+            <NavigationBar show={true}/>
             <Body>
                 <StatusColumns status="To-Do"/>
                 <StatusColumns status="Doing"/>
