@@ -14,9 +14,6 @@ function NavigationBar() {
                 <p className='font-helvetica font-bold text-[25px] text-[#D9D9D9] group-hover:text-[#212121]'>Add Task</p>
             </button>
         </span>
-    
-
-        
     </div>
   )
 }
