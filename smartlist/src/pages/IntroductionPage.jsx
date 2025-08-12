@@ -3,7 +3,7 @@ import Background from "../components/Background";
 
 function IntroductionPage() {
     const { state } = useLocation();   
-    const user_name = state.name;
+    const user_name = state?.name || 'User';
     const navigate = useNavigate();
 
     const handleClick = () => {
