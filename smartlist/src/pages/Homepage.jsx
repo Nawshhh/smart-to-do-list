@@ -5,6 +5,7 @@ import Background from '../components/Background';
 import Body from '../components/Body';
 import NavigationBar from '../components/NavigationBar';
 import StatusColumns from '../components/StatusColumns';
+import Task from '../components/Task';
 
 function Homepage() {
     const { state } = useLocation();
@@ -23,7 +24,9 @@ function Homepage() {
                     expression={'.'}/>
             <NavigationBar show={true}/>
             <Body>
-                <StatusColumns status="To-Do"/>
+                <StatusColumns status="To-Do">
+                    <Task/>
+                </StatusColumns>
                 <StatusColumns status="Doing"/>
                 <StatusColumns status="Done"/>
             </Body>
