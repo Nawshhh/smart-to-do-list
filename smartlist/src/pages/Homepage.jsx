@@ -9,7 +9,12 @@ import StatusColumns from '../components/StatusColumns';
 function Homepage() {
     const { state } = useLocation();
     const user_name = state?.user_name || 'User';
-    if (!user_name) return null;
+    if (!user_name) {
+        return null;
+    }
+
+    console.log("State @ Homepage: " + state);
+    console.log("Task Information @ Homepage: " + state.task_info);
 
     return (
         <Background>

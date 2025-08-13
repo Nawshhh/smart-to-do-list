@@ -1,8 +1,41 @@
 import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+
 
 function TaskInformationForm() {
+    const { state } = useLocation();
+    const navigate = useNavigate();
+    const user_name = state?.user_name || 'User';
+
+    const [name, setName] = useState("");
+    const status = "to-do";
+    const [priority, setPriority] = useState("");
+    const [completionDate, setCompletionDate] = useState("");
+    const [completionTime, setCompletionTime] = useState("");
+    const [description, setDescription] = useState("");
+
+    console.log("@ Add Task: "+ user_name);
+
+    const goToHomepage = () => {
+        navigate("/homepage",{
+            state: {
+                user_name: user_name,
+                task_info: {
+                    task_name: name,
+                    task_status: status,
+                    task_priority: priority,
+                    task_completion_date: completionDate,
+                    task_completion_time: completionTime,
+                    task_description: description
+                }
+            }
+        });
+    }
+
+
   return (
-    <form className='w-[700px] h-[784px] bg-[#393939] rounded-[10px] flex flex-col px-[40.06px] pt-[25px] pb-[50px]' action="">
+    <div className='w-[700px] h-[784px] bg-[#393939] rounded-[10px] flex flex-col px-[40.06px] pt-[25px] pb-[50px]'>
         <div className='w-[620px] h-auto flex flex-col'>
             <p className='font-helvetica text-white text-[50px] font-medium'>Task Information</p>
             <p className='font-helvetica text-white text-[20px] font-light italic'>Fill up the necessary information for your task   </p>
@@ -16,6 +49,8 @@ function TaskInformationForm() {
                     type="text" 
                     name="task_name" 
                     id="task_name" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className='w-full h-[48px] rounded-[5px] bg-[#757575] font-helvetica text-white font-normal px-[20px] py-[12px] 
                     focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
                     placeholder='Enter Name'
@@ -30,19 +65,36 @@ function TaskInformationForm() {
                         type="text" 
                         name='task_status'
                         id='task_status'
+                        value={status}
+                        readOnly
                         className='w-full h-[51px] rounded-[5px] bg-[#757575] font-helvetica text-white font-normal px-[20px] py-[12px] 
-                        focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
+                        focus:outline-none focus:ring-0 focus:caret-[#BDBDBD] cursor-pointer'
                     />
                 </div>
                 <div>
                     <p className='font-helvetica font-medium text-[20px] text-white mb-[10px]'>Priority</p>
-                    <input 
-                        type="text" 
-                        name='task_priority'
-                        id='task_priority'
-                        className='w-full h-[51px] rounded-[5px] bg-[#757575] font-helvetica text-white font-normal px-[20px] py-[12px] 
-                        focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
-                    />
+                    <div className='relative w-full'>
+                        <select 
+                            name="task_priority" 
+                            id="task_priority"
+                            value={priority}
+                            onChange={(e) => setPriority(e.target.value)}
+                            className='w-full h-[51px] rounded-[5px] bg-[#757575] font-helvetica text-white font-normal px-[20px] py-[12px] 
+                            focus:outline-none focus:ring-0 focus:caret-[#BDBDBD] 
+                            appearance-none [-webkit-appearance:none] [-moz-appearance:none]'>
+                            <option value="" disabled></option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <svg
+                            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 text-white"
+                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                        >
+                            <path d="M5.5 7.5l4.5 4.5 4.5-4.5" />
+                        </svg>
+                    </div>
+                    
                 </div>
                 <div>
                     <p className='font-helvetica font-medium text-[20px] text-white mb-[10px]'>Completion Date</p>
@@ -51,6 +103,8 @@ function TaskInformationForm() {
                             type="date" 
                             name='task_completion_date'
                             id='task_completion_date'
+                            value={completionDate}
+                            onChange={(e) => setCompletionDate(e.target.value)}
                             className='w-full h-[51px] rounded-[5px] bg-[#757575] font-helvetica font-light text-white  px-[20px]
                             focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
                             style={{
@@ -63,8 +117,10 @@ function TaskInformationForm() {
                     <p className='font-helvetica font-medium text-[20px] text-white mb-[10px]'>Completion Time</p>
                     <input 
                         type="time" 
-                        name='task_priority'
-                        id='task_priority'
+                        name='task_completion_time'
+                        id='task_completion_time'
+                        value={completionTime}
+                        onChange={(e) => setCompletionTime(e.target.value)}
                         className='w-full h-[51px] rounded-[5px] bg-[#757575] font-helvetica font-light text-white px-[20px]
                         focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
                         style={{
@@ -80,7 +136,10 @@ function TaskInformationForm() {
                 <textarea 
                     name="task_description" 
                     id="task_description"
-                    className='rounded-[5px] bg-[#757575] font-helvetica font-normal text-white min-h-[150px] max-h-h[150px] w-full resize-none px-[20px] py-[12px]'
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className='rounded-[5px] bg-[#757575] font-helvetica font-normal text-white min-h-[150px] max-h-h[150px] w-full resize-none px-[20px] py-[12px]
+                    focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
                 ></textarea>
             </div>
 
@@ -88,17 +147,22 @@ function TaskInformationForm() {
         
         {/* Buttons */}
         <div className='w-[620px] h-auto flex flex-row mt-[20px]'>
-            <button className='w-[120px] h-[40px] bg-[#757575] font-helvetica text-[20px] text-white rounded-[5px] 
+            <button 
+                type="button"
+                onClick={goToHomepage}
+                className='w-[120px] h-[40px] bg-[#757575] font-helvetica text-[20px] text-white rounded-[5px] 
                                 inline-flex items-center justify-center'>
             Cancel</button>
-            <button className='w-[120px] h-[40px] ml-[15px] bg-[#BDBDBD] font-helvetica text-[20px] text-black rounded-[5px] 
+            <button 
+                onClick={goToHomepage}
+                className='w-[120px] h-[40px] ml-[15px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
                                 inline-flex items-center justify-center'>
             Proceed</button>
-            <button className='w-[262px] h-[40px] ml-[15px] bg-[#BDBDBD] font-helvetica text-[20px] text-black rounded-[5px] 
+            <button className='w-[262px] h-[40px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
                                 inline-flex items-center justify-center ml-auto'>
             Generate Suggestions</button>
         </div>
-    </form>
+    </div>
   )
 }
 
