@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
+app.use(express.json()); // middleware function
+
 app.use("/smartlist", taskRoutes);
 
 app.listen(PORT, () => {
