@@ -147,12 +147,14 @@ function TaskInformationForm() {
         
         {/* Buttons */}
         <div className='w-[620px] h-auto flex flex-row mt-[20px]'>
-            <button 
-                type="button"
-                onClick={goToHomepage}
-                className='w-[120px] h-[40px] bg-[#757575] font-helvetica text-[20px] text-white rounded-[5px] 
-                                inline-flex items-center justify-center'>
-            Cancel</button>
+            <Link to="/smartlist/homepage" state={{ user_name: user_name }}>
+                <button 
+                    type="button"
+                    onClick={goToHomepage}
+                    className='w-[120px] h-[40px] bg-[#757575] font-helvetica text-[20px] text-white rounded-[5px] 
+                                    inline-flex items-center justify-center'>
+                Cancel</button>
+            </Link>
             <button 
                 onClick={goToHomepage}
                 className='w-[120px] h-[40px] ml-[15px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 

@@ -7,7 +7,7 @@ function IntroductionPage() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/homepage", {
+        navigate("/smartlist/homepage", {
             state: {
                 user_name: user_name
             }

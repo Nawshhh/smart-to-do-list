@@ -3,6 +3,7 @@ import taskRoutes from "./routes/taskRoutes.js"
 import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
 import rateLimiter from "./middleware/rateLimiter.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -13,12 +14,16 @@ app.use(express.json()); // middleware function
 
 app.use(rateLimiter);
 
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
+
 app.use("/smartlist", taskRoutes);
 
 // connect first and then put the console log of listening inside the db
 connectDB().then(() => {
     app.listen(PORT, () => {
-        console.log("Server started on PORT: 5001");
+        console.log("Server started on PORT: ", PORT);
     });
 });
 

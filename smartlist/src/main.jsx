@@ -1,7 +1,7 @@
 import React from "react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AskName from "./pages/AskName.jsx";
 import IntroductionPage from "./pages/IntroductionPage.jsx";
@@ -10,15 +10,18 @@ import AddTask from "./pages/AddTask.jsx";
 
 import "./style.css";
 
-const router = createBrowserRouter([
-  {path: "/", element: <AskName />},
-  {path: "/introduction", element: <IntroductionPage />},
-  {path:"/homepage", element: <Homepage />},
-  {path:"/add-task", element: <AddTask />}
-]);
+ 
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AskName />}/>
+        <Route path="/introduction" element={<IntroductionPage />}/>
+        <Route path="/smartlist/homepage" element={<Homepage />}/>
+        <Route path="/smartlist/add-task" element={<AddTask />}/>
+      </Routes>
+    </BrowserRouter>
   </StrictMode>
 );
