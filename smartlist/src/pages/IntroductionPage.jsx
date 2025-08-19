@@ -2,8 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Background from "../components/Background";
 import { useEffect, useState } from "react";
 
-function IntroductionPage() {
-    const { state } = useLocation();   
+function IntroductionPage() { 
     const navigate = useNavigate();
     const [name, setName] = useState("");
 

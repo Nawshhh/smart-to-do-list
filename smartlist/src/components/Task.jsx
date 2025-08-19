@@ -9,7 +9,7 @@ function Task({task}) {
     const priority = priorityMap[task.priority] ?? ""; 
 
     // color corresponding to priority
-    const bgMap = { 1: "bg-[#DE3D3D]", 2: "bg-[#3DDE3D]", 3: "bg-[#DEDE3D]" };
+    const bgMap = { 1: "bg-[#DE3D3D]", 2: " bg-[#DEDE3D]", 3: "bg-[#3DDE3D]" };
     const bgColor = bgMap[task.priority] ?? "";
 
     // format by date
