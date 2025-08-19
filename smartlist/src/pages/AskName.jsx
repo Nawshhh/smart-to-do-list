@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Background from "../components/Background";
 
 function AskName() {
-  const [input, setInput] = useState("");
-  const [name, setName] = useState(null);
-
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('name', JSON.stringify(name));
+      console.log(localStorage);
+    } catch (error) {
+      console.error("Error saving name to local storage: ", error);
+    }
+  }, [name]);
 
   const saveAndGo = () => {
-    const user_input = input.trim();
     // route to the next page
-    navigate("/introduction", { 
-        state: { 
-            name: user_input 
-        }
-    })
+    navigate("/introduction");
   };
-
-
 
   return (
     <Background>
@@ -27,8 +27,8 @@ function AskName() {
           type="text" 
           name="user_input" 
           id="user_input" 
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key == "Enter" && saveAndGo()}
           className="w-[355px] h-[48px] bg-[#545454] rounded-[30px] px-[20px] py-[12px] 
           focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]

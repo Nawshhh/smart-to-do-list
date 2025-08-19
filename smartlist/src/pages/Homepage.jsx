@@ -9,15 +9,8 @@ import Task from '../components/Task';
 import axios from 'axios';
 
 function Homepage() {
-    const { state } = useLocation();
-    const user_name = state?.user_name || 'User';
-
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    if (!user_name) {
-        return null;
-    }
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -48,9 +41,7 @@ function Homepage() {
 
     return (
         <Background>
-            <Header name={user_name} 
-                    statement={"These are your list of things to do"} 
-                    expression={'.'}/>
+            <Header statement={"These are your list of things to do"} expression={'.'}/>
             <NavigationBar show={true}/>
             <Body>
                 <StatusColumns status="To-Do" tasks={toDoTasks}/>

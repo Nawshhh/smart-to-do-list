@@ -1,12 +1,10 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react';
 
 
 function TaskInformationForm() {
-    const { state } = useLocation();
     const navigate = useNavigate();
-    const user_name = state?.user_name || 'User';
 
     const [name, setName] = useState("");
     const status = "to-do";
@@ -15,24 +13,9 @@ function TaskInformationForm() {
     const [completionTime, setCompletionTime] = useState("");
     const [description, setDescription] = useState("");
 
-    console.log("@ Add Task: "+ user_name);
-
     const goToHomepage = () => {
-        navigate("/homepage",{
-            state: {
-                user_name: user_name,
-                task_info: {
-                    task_name: name,
-                    task_status: status,
-                    task_priority: priority,
-                    task_completion_date: completionDate,
-                    task_completion_time: completionTime,
-                    task_description: description
-                }
-            }
-        });
+        navigate("/smartlist/homepage");
     }
-
 
   return (
     <div className='w-[700px] h-[784px] bg-[#393939] rounded-[10px] flex flex-col px-[40.06px] pt-[25px] pb-[50px]'>
@@ -147,7 +130,7 @@ function TaskInformationForm() {
         
         {/* Buttons */}
         <div className='w-[620px] h-auto flex flex-row mt-[20px]'>
-            <Link to="/smartlist/homepage" state={{ user_name: user_name }}>
+            <Link to="/smartlist/homepage">
                 <button 
                     type="button"
                     onClick={goToHomepage}

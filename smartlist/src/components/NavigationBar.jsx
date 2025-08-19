@@ -7,11 +7,7 @@ function NavigationBar({ show = true, ...props }) {
     const user_name = state?.user_name || 'User';
 
     const goToAddTask = () => {
-        navigate("/add-task",{
-            state: {
-                user_name: user_name
-            }
-        });
+        navigate("/add-task");
     }
 
   return (
@@ -26,7 +22,7 @@ function NavigationBar({ show = true, ...props }) {
                 </span>
                 
                 <span className='group'>
-                    <Link to="/smartlist/add-task" state={{ user_name: user_name }}>
+                    <Link to="/smartlist/add-task">
                         <button id="add-task" 
                         className='group-hover:bg-[#D9D9D9] h-[56px] w-[170px] flex items-center justify-center bg-[#545454] rounded-b-[20px]'>
                             <p className='font-helvetica font-bold text-[25px] text-[#D9D9D9] group-hover:text-[#212121]'>Add Task</p>

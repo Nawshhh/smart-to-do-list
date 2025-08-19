@@ -9,14 +9,11 @@ import TaskInformationForm from '../components/TaskInformationForm'
 import AISuggestionsForm from '../components/AISuggestionsForm'
 
 function AddTask() {
-    const { state } = useLocation();
-    const user_name = state?.user_name || 'User';
-
     return (
         <Background>
             <Header 
                 statement={"What would you like to add"} 
-                name={user_name + "?"} 
+                expression={'?'}
             />
             <NavigationBar show={false}/>
             <Body>

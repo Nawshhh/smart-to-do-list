@@ -1,17 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Background from "../components/Background";
+import { useEffect, useState } from "react";
 
 function IntroductionPage() {
     const { state } = useLocation();   
-    const user_name = state?.name || 'User';
     const navigate = useNavigate();
+    const [name, setName] = useState("");
+
+    useEffect(() => {
+        try {
+            const name = JSON.parse(localStorage.getItem('name'));
+
+            if (name){
+                setName(name);
+                console.log("This is the name from storage: ", name);   
+            }
+        } catch (error) {
+            console.log("Error fetching name from local storage at Introduction Page: ", error);
+        }
+    },[]);
 
     const handleClick = () => {
-        navigate("/smartlist/homepage", {
-            state: {
-                user_name: user_name
-            }
-        });
+        navigate("/smartlist/homepage");
     }
 
   return (
@@ -20,7 +30,7 @@ function IntroductionPage() {
             <div className="w-[338px] h-[167px] flex flex-col">
                 <p className="font-helvetica font-bold text-white text-[50px]">Hello,</p>
                 <div className="flex">
-                    <p className="font-helvetica font-bold text-[#BDBDBD] text-[80px] tw-animation">{user_name}</p>
+                    <p className="font-helvetica font-bold text-[#BDBDBD] text-[80px] tw-animation">{name}</p>
                 </div>
             </div>
         </Background>
