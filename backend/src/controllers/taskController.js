@@ -1,4 +1,6 @@
 import Task from "../models/Task.js";
+import {hfClient}  from "../config/hfClient.js";
+import {promptMessage,systemPrompt} from "../config/utilities.js";
 
 export async function getAllTasks (req,res) {
     try {
@@ -36,7 +38,6 @@ export async function createTask(req,res) {
     }
 }
 
-
 export async function updateTask(req,res) {
     try {
         const { name,
@@ -65,5 +66,35 @@ export async function deleteTask(req,res){
     } catch (error) {
         console.error("error in deleteTask controller", error);
         res.status(500).json({message: "error delete"});
+    }
+}
+
+export async function generateTasks(req,res) {
+
+    const SEED_CONTEXT = {
+        name: "Do Math Homework",
+        status: 1,
+        priority: 1,
+        completion_date: "2025-08-20",
+        completion_time: "17:30",
+        description: "Finish algebra and calculus problems."
+    };
+
+    try {
+        const chatCompletion = await hfClient.chatCompletion({
+            model: "openai/gpt-oss-120b",
+            messages: [
+                { role: "system", content: systemPrompt() },
+                { role: "user", content: promptMessage(SEED_CONTEXT) }
+            ],
+          });
+          
+          const model_message = chatCompletion.choices[0].message.content;
+          const data = JSON.parse(model_message);
+
+          res.status(200).json({message: "successs", content: data});
+    } catch (error) {
+        console.error("error in generatingTasks controller", error);
+        res.status(500).json({message: "error generating"});
     }
 }
