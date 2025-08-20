@@ -34,6 +34,32 @@ function TaskInformationForm() {
         }
     }
 
+    const generateTasks = async (event) => {
+        event.preventDefault();
+
+        setIsGenerating(true);
+
+        try {
+            // post request to http... and get the response and transfer the responses to AIsuggestionsForm.jsx
+            const response = await axios.post('http://localhost:5000/smartlist/generate-tasks' , {
+                name, 
+                description,
+                status, 
+                priority, 
+                completion_date: completionDate, 
+                completion_time: completionTime
+            })
+            setAiSuggestions(response.data || []);
+            console.log("AI suggestions generated:", response.data);
+        } catch (error) {
+            console.log("Failed to generate suggestions:", error);
+            setAiSuggestions([]); // Set empty array on error
+        } finally {
+            setIsGenerating(false);
+        }
+        
+    }
+
     const goToHomepage = () => {
         navigate("/smartlist/homepage");
     }

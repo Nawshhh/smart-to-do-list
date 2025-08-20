@@ -9,7 +9,7 @@ function Task({task}) {
     const priority = priorityMap[task.priority] ?? ""; 
 
     // color corresponding to priority
-    const bgMap = { 1: "bg-[#DE3D3D]", 2: " bg-[#DEDE3D]", 3: "bg-[#3DDE3D]" };
+    const bgMap = { 1: "bg-[#DE3D3D]", 2: " bg-[#C86C41]", 3: "bg-[#3BAD3B]" };
     const bgColor = bgMap[task.priority] ?? "";
 
     // format by date
@@ -21,11 +21,11 @@ function Task({task}) {
             <div className='w-full h-full pl-[15px] pr-[13px] py-[15px]'>
                 <div className='w-full h-full '>
                     <p className='font-helvetica font-medium text-white text-[20px]'>{task.name}</p>
-                    <span className='flex flex-row'>
+                    <span className='flex flex-row items-center mt-[5px]'>
                         <p className='font-helvetica font-normal text-[#ADADAD] text-[14px] '>Complete by: {formattedDate}</p>
                         <p className='font-helvetica font-normal text-[#ADADAD] text-[14px] ml-[10px]'>|</p>
-                        <div className={`px-[6px] inline-flex items-center justify-center w-auto h-auto rounded-[15px] ml-[12px] ${bgColor}`}>
-                            <p className='font-helvetica font-bold text-white text-[10px]'>{priority}</p>
+                        <div className={`px-[px] inline-flex items-center justify-center w-[50px] h-[18px]  rounded-[15px] ml-[12px] ${bgColor}`}>
+                            <p className='font-helvetica font-light text-white text-[10px]'>{priority}</p>
                         </div>
                     </span>
                 </div>
