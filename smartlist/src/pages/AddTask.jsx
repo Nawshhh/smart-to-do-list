@@ -8,7 +8,13 @@ import Body from '../components/Body'
 import TaskInformationForm from '../components/TaskInformationForm'
 import AISuggestionsForm from '../components/AISuggestionsForm'
 
+import { useState } from 'react'
+
 function AddTask() {
+    const [aiSuggestions, setAiSuggestions] = useState([]);
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [generateAgain, setGenerateAgain] = useState(false);
+
     return (
         <Background>
             <Header 
@@ -17,8 +23,18 @@ function AddTask() {
             />
             <NavigationBar show={false}/>
             <Body>
-                <TaskInformationForm/>
-                <AISuggestionsForm/>
+                <TaskInformationForm 
+                    setAiSuggestions={setAiSuggestions}
+                    setIsGenerating={setIsGenerating}
+                    setGenerateAgain={setGenerateAgain}
+                    isGenerating={isGenerating}
+                />
+                <AISuggestionsForm 
+                    aiSuggestions={aiSuggestions}
+                    isGenerating={isGenerating}
+                    generateAgain={generateAgain}
+                    setGenerateAgain={setGenerateAgain}
+                />
             </Body> 
         </Background>
     )

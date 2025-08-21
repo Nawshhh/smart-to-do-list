@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 
-function TaskInformationForm() {
+function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgain, isGenerating}) {
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
@@ -50,6 +50,7 @@ function TaskInformationForm() {
                 completion_time: completionTime
             })
             setAiSuggestions(response.data || []);
+            setGenerateAgain(true);
             console.log("AI suggestions generated:", response.data);
         } catch (error) {
             console.log("Failed to generate suggestions:", error);
@@ -186,13 +187,16 @@ function TaskInformationForm() {
                                         inline-flex items-center justify-center'>
                     Cancel</button>
                 </Link>
-                <button type="submit" className='w-[120px] h-[40px] ml-[15px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
-                inline-flex items-center justify-center' disabled={loading}>
-                    {loading ? "Creating...": "Proceed"}
-                </button>
-                <button className='w-[262px] h-[40px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
-                                    inline-flex items-center justify-center ml-auto'>
-                Generate Suggestions</button>
+                { loading ? <button type="submit" className='w-[120px] h-[40px] ml-[15px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
+                            inline-flex items-center justify-center' disabled={loading}>Creating...</button>
+                : <button type="submit" className='w-[120px] h-[40px] ml-[15px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
+                            inline-flex items-center justify-center'>Create</button>}
+                
+                {isGenerating ? <button type='button' className='w-[262px] h-[40px] bg-white font-helvetica text-[20px] text-black rounded-[5px] 
+                                    inline-flex items-center justify-center ml-auto' disabled={isGenerating}>Generating...</button>
+                : <button type='button' onClick={generateTasks} className='w-[262px] h-[40px] bg-[#757575] font-helvetica text-[20px] text-white rounded-[5px] 
+                                    inline-flex items-center justify-center ml-auto'>Generate Suggestions</button>}
+                
             </div>
         </form>
     </div>

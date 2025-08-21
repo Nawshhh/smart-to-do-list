@@ -71,15 +71,22 @@ export async function deleteTask(req,res){
 
 export async function generateTasks(req,res) {
 
-    const SEED_CONTEXT = {
-        name: "Do Math Homework",
-        status: 1,
-        priority: 1,
-        completion_date: "2025-08-20",
-        completion_time: "17:30",
-        description: "Finish algebra and calculus problems."
-    };
+    const { name,
+        status,
+        priority,
+        completion_date,
+        completion_time,
+        description } = req.body;
 
+    const SEED_CONTEXT = {
+        name: name,
+        status: status,
+        priority: priority,
+        completion_date: completion_date,
+        completion_time: completion_time,
+        description: description
+    };
+    
     try {
         const chatCompletion = await hfClient.chatCompletion({
             model: "openai/gpt-oss-120b",
@@ -92,7 +99,7 @@ export async function generateTasks(req,res) {
           const model_message = chatCompletion.choices[0].message.content;
           const data = JSON.parse(model_message);
 
-          res.status(200).json({message: "successs", content: data});
+          res.status(200).json(data);
     } catch (error) {
         console.error("error in generatingTasks controller", error);
         res.status(500).json({message: "error generating"});
