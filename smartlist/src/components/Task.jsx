@@ -2,8 +2,6 @@ import React from 'react'
 import { formatDate } from '../utilities/utils.js';
 
 function Task({task}) {
-    console.log("Rendered Task: " + task.name);
-
     // priority
     const priorityMap = { 1: "High", 2: "Medium", 3: "Low" };
     const priority = priorityMap[task.priority] ?? ""; 

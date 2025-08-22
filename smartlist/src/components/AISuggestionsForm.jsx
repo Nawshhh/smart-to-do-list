@@ -10,15 +10,27 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
   const [loadingIndex, setLoadingIndex] = useState(null);
   const [addedByIndex, setAddedByIndex] = useState({});
 
-  const addAiTask = async (event, index) => {
+  // adding of task to db
+  const addAiTask = async (event, index, suggestion) => {
       event.preventDefault();
 
       setLoadingIndex(index);
 
       try {
-        const response = await axios.get("http://localhost:5000/smartlist/homepage");
+        const suggested_task = {
+          name: suggestion?.name,
+          status: suggestion?.status,
+          priority: suggestion?.priority,
+          completion_date: suggestion?.completion_date,
+          completion_time: suggestion?.completion_time,
+          description: suggestion?.description
+        }
+
+        const response = await axios.post("http://localhost:5000/smartlist/add-task", suggested_task);
         console.log(response);
-        console.log("Testing Partially Complete.");
+        // load a toast
+        console.log("Generated Task Added To Homepage.");
+
       } catch (error) {
         console.error("Error Testing Ai Tasks: ", error);
       } finally {
@@ -27,6 +39,7 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
       }
   }
 
+  // it restarts the accessibility of buttons
   useEffect(() => {
     if (generateAgain) {
       setAddedByIndex({});
@@ -48,7 +61,7 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
           <div className='flex flex-col w-full h-auto gap-y-[15px]'>
             {aiSuggestions.length > 0 ? (
               aiSuggestions.map((suggestion, index) => (
-                <form key={index} className='flex items-center' onSubmit={(e) => addAiTask(e, index)}>
+                <form key={index} className='flex items-center' onSubmit={(e) => addAiTask(e, index, suggestion)}>
                   <Task key={index} task={suggestion}/>
                   {loadingIndex === index ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
                               <span className='font-helvetica text-[20px] text-white' disabled={loadingIndex === index}>Adding...</span>
@@ -56,7 +69,7 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
                   : (addedByIndex[index] ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
                               <span className='font-helvetica text-[20px] text-white' disabled={addedByIndex[index]}>Added</span>
                             </button>
-                  : <button type='submit' className='bg-[#d9d9d9] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
+                  : <button type='submit' className='bg-[#d9d9d9] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px] hover:bg-[#B3B3B3]'>
                     <span className='font-helvetica text-[20px] text-black'>Add</span>
                   </button>)}
                 </form>
