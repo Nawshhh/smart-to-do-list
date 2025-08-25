@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgain, isGenerating}) {
@@ -17,6 +18,18 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // input validation
+        if (!name.trim() || !completionDate.trim() || !completionTime.trim() || !description.trim()){
+            toast.error("All fields are required. Try Again", {
+                    style: {
+                        background: "#393939",
+                        color: "#FFFFFF"
+                    }
+                }
+            );
+            return;
+        }
         
         setLoading(true);
 
@@ -24,8 +37,15 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
             await axios.post("http://localhost:5000/smartlist/add-task",{
                 name, status, priority, description, 
                 completion_date: completionDate, completion_time: completionTime
-            })
-            console.log("Note Created Successfully!");
+            });
+            console.log("Task Created Successfully!");
+            toast.success("Successfully Added!", {
+                    style: {
+                        background: "#393939",
+                        color: "#FFFFFF"
+                    }
+                }
+            );
             navigate('/smartlist/homepage');
         } catch (error) {
             console.log("Failed to create task: ", error);

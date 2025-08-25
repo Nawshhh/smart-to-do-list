@@ -2,6 +2,7 @@ import React from 'react'
 import Task from './Task'
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+import toast from 'react-hot-toast';
 
 function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGenerateAgain }) {
   console.log("isGenerating State: ", isGenerating);
@@ -28,9 +29,14 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
 
         const response = await axios.post("http://localhost:5000/smartlist/add-task", suggested_task);
         console.log(response);
-        // load a toast
         console.log("Generated Task Added To Homepage.");
-
+        toast.success("Successfully Added!", {
+                style: {
+                    background: "#393939",
+                    color: "#FFFFFF"
+                }
+            }
+        );
       } catch (error) {
         console.error("Error Testing Ai Tasks: ", error);
       } finally {

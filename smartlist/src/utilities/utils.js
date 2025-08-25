@@ -5,3 +5,7 @@ export function formatDate(date) {
     const year = dateObj.getFullYear();
     return `${month}/${day}/${year}`;
 }
+
+export function sortTasks(){
+    
+}
