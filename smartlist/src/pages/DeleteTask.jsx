@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import Header from '../components/Header'
+import React from 'react';
 import Background from '../components/Background';
-import Body from '../components/Body';
+import Header from '../components/Header';
 import NavigationBar from '../components/NavigationBar';
+import Body from '../components/Body';
 import StatusColumns from '../components/StatusColumns';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 
-function Homepage() {
+function DeleteTask() {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -33,21 +35,27 @@ function Homepage() {
     const doingTasks = tasks.filter(task => task.status === 2);
     const doneTasks = tasks.filter(task => task.status === 3);
 
-    console.log(toDoTasks);
-    console.log("Doing Tasks: " + doingTasks);
-    console.log("Done Tasks: " + doneTasks);
+    console.log("@ Delete Task");
 
-    return (
-        <Background>
-            <Header statement={"These are your list of things to do"} expression={'.'}/>
-            <NavigationBar show={true}/>
-            <Body>
-                <StatusColumns status="To-Do" tasks={toDoTasks}/>
-                <StatusColumns status="Doing" tasks={doingTasks}/>
-                <StatusColumns status="Done" tasks={doneTasks}/>
-            </Body>
-        </Background>
-    )
+
+  return (
+    <Background>
+        <Header
+            statement={"What will you remove"} 
+            expression={'?'}
+        />
+        <NavigationBar show={true}/>
+        <Body>
+            <StatusColumns status="To-Do" tasks={toDoTasks}/>
+            <StatusColumns status="Doing" tasks={doingTasks}/>
+            <StatusColumns status="Done" tasks={doneTasks}/>
+        </Body>
+        <Link to="/smartlist/homepage">
+            <button type="button"
+                className='mt-[53px] bg-white font-helvetica text-[20px] text-black rounded-[5px] w-[118px] h-[40px] hover:bg-[#DFDFDF]'>Home</button>
+        </Link>
+    </Background>
+  )
 }
 
-export default Homepage
+export default DeleteTask

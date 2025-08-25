@@ -1,10 +1,8 @@
 import React from 'react'
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function NavigationBar({ show = true, ...props }) {
-    const { state } = useLocation();
     const navigate = useNavigate();
-    const user_name = state?.user_name || 'User';
 
     const goToAddTask = () => {
         navigate("/add-task");
@@ -15,10 +13,12 @@ function NavigationBar({ show = true, ...props }) {
         {show && (
             <>
                 <span className='group'>
-                    <button id="delete-task" 
-                            className=' group-hover:bg-[#D9D9D9] h-[56px] w-[170px] flex items-center justify-center bg-[#545454] rounded-b-[20px]'>
-                        <p className='font-helvetica font-bold text-[25px] text-[#D9D9D9] group-hover:text-[#212121]'>Delete</p>
-                    </button>
+                    <Link to="/smartlist/delete-task">
+                        <button id="delete-task" 
+                                className=' group-hover:bg-[#D9D9D9] h-[56px] w-[170px] flex items-center justify-center bg-[#545454] rounded-b-[20px]'>
+                            <p className='font-helvetica font-bold text-[25px] text-[#D9D9D9] group-hover:text-[#212121]'>Delete</p>
+                        </button>
+                    </Link>
                 </span>
                 
                 <span className='group'>

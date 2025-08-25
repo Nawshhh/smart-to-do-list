@@ -8,6 +8,7 @@ import AskName from "./pages/AskName.jsx";
 import IntroductionPage from "./pages/IntroductionPage.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import AddTask from "./pages/AddTask.jsx";
+import DeleteTask from "./pages/DeleteTask.jsx";
 
 import "./style.css";
 
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/introduction" element={<IntroductionPage />}/>
         <Route path="/smartlist/homepage" element={<Homepage />}/>
         <Route path="/smartlist/add-task" element={<AddTask />}/>
+        <Route path="/smartlist/delete-task" element={<DeleteTask />}/>
       </Routes>
       <Toaster position="bottom-right" reverseOrder={true}/>
     </BrowserRouter>

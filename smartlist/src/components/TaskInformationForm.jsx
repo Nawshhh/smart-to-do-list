@@ -57,6 +57,18 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
     const generateTasks = async (event) => {
         event.preventDefault();
 
+        // input validation
+        if (!name.trim() || !completionDate.trim() || !completionTime.trim() || !description.trim()){
+            toast.error("Cannot generate with missing fields.", {
+                    style: {
+                        background: "#393939",
+                        color: "#FFFFFF"
+                    }
+                }
+            );
+            return;
+        }
+
         setIsGenerating(true);
 
         try {

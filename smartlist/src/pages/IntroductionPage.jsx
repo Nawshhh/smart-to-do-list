@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Background from "../components/Background";
 import { useEffect, useState } from "react";
 
@@ -26,7 +26,7 @@ function IntroductionPage() {
   return (
     <div onClick={handleClick}>
         <Background>
-            <div className="w-[338px] h-[167px] flex flex-col">
+            <div className="w-dvh h-dvh flex flex-col items-center justify-center" >
                 <p className="font-helvetica font-bold text-white text-[50px]">Hello,</p>
                 <div className="flex">
                     <p className="font-helvetica font-bold text-[#BDBDBD] text-[80px] tw-animation">{name}</p>
