@@ -42,9 +42,9 @@ function Homepage() {
             <Header statement={"These are your list of things to do"} expression={'.'}/>
             <NavigationBar show={true}/>
             <Body>
-                <StatusColumns status="To-Do" tasks={toDoTasks}/>
-                <StatusColumns status="Doing" tasks={doingTasks}/>
-                <StatusColumns status="Done" tasks={doneTasks}/>
+                <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={false}/>
+                <StatusColumns status="Doing" tasks={doingTasks} deleteMode={false}/>
+                <StatusColumns status="Done" tasks={doneTasks} deleteMode={false}/>
             </Body>
         </Background>
     )

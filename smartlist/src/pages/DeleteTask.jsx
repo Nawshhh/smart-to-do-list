@@ -46,9 +46,9 @@ function DeleteTask() {
         />
         <NavigationBar show={true}/>
         <Body>
-            <StatusColumns status="To-Do" tasks={toDoTasks}/>
-            <StatusColumns status="Doing" tasks={doingTasks}/>
-            <StatusColumns status="Done" tasks={doneTasks}/>
+            <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={true}/>
+            <StatusColumns status="Doing" tasks={doingTasks} deleteMode={true}/>
+            <StatusColumns status="Done" tasks={doneTasks} deleteMode={true}/>
         </Body>
         <Link to="/smartlist/homepage">
             <button type="button"
