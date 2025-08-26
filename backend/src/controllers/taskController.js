@@ -58,11 +58,22 @@ export async function updateTask(req,res) {
 
 export async function deleteTask(req,res){
     try {
-        const deletedTask = await Task.findByIdAndDelete(req.params.id);
-        if (!deletedTask){
-            return res.status(404).json({message: "note not found"});
+        const { ids } = req.body;
+
+        if (!Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ message: "ids must be a non-empty array" });
         }
-        res.status(200).json({message: "deleted successfully!"});
+
+        const result = await Task.deleteMany({ _id: { $in: ids } });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "No matching tasks found to delete" });
+        }
+
+        res.status(200).json({
+            message: "Deleted successfully",
+            deletedCount: result.deletedCount
+        });
     } catch (error) {
         console.error("error in deleteTask controller", error);
         res.status(500).json({message: "error delete"});

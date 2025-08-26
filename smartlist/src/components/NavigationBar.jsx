@@ -9,7 +9,7 @@ function NavigationBar({ show = true, ...props }) {
     }
 
   return (
-    <div className='min-h-[56px] min-w-[1608px] border-t-[1px] border-white justify-end gap-x-[20px] flex flex-row'>
+    <div className='min-h-auto min-w-auto h-[56px] w-[1608px] max-w-full max-h-full border-t-[1px] border-white justify-end gap-x-[20px] flex flex-row'>
         {show && (
             <>
                 <span className='group'>

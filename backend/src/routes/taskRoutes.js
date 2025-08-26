@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/homepage", getAllTasks);
 router.post("/add-task", createTask);
 router.put("/update-task/:id", updateTask);
-router.delete("/delete-task/:id", deleteTask);
+router.delete("/delete-task", deleteTask);
 router.post("/generate-tasks", generateTasks);
 
 export default router;

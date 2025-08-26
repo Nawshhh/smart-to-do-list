@@ -22,7 +22,7 @@ function AskName() {
 
   return (
     <Background>
-      <div className="w-dvh h-dvh flex flex-col items-center justify-center">
+      <div className="w-full h-full flex flex-col items-center justify-center">
         <p className="font-helvetica font-bold text-white  text-[25px]">What should we call you?</p>
           <input 
             type="text" 

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { formatDate } from '../utilities/utils.js';
 
 function Task({ task, toggleDelete, clicked, onToggle }) {
-    console.log("Rendered Task: ", task);
     // priority
     const priorityMap = { 1: "High", 2: "Medium", 3: "Low" };
     const priority = priorityMap[task.priority] ?? ""; 

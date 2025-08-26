@@ -1,14 +1,13 @@
 import React from 'react'
 import Task from './Task'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function StatusColumns({tasks,status,deleteMode}) {
+function StatusColumns({tasks,status,deleteMode,clickedIds = [], setClickedIds, ...props}) {
   console.log("Delete Mode: ", deleteMode);
 
-  const [clickedIds, setClickedIds] = useState([]); // store IDs of clicked tasks
   const toggleClicked = (id) => {
     if (!deleteMode) return;
-    setClickedIds(prev =>
+    setClickedIds?.(prev =>
       prev.includes(id)
         ? prev.filter(clickedId => clickedId !== id) // remove if already clicked
         : [...prev, id] // add if not clicked
@@ -27,7 +26,7 @@ function StatusColumns({tasks,status,deleteMode}) {
                   key={task._id}
                   task={task}
                   toggleDelete={deleteMode}
-                  clicked={clickedIds.includes(task._id)}
+                  clicked={clickedIds?.includes(task._id)}
                   onToggle={() => toggleClicked(task._id)}
                 />
             ))}
