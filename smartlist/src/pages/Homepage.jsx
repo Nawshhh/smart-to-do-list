@@ -8,10 +8,11 @@ import axios from 'axios';
 
 function Homepage() {
     const [tasks, setTasks] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchTasks = async () => {
+            setLoading(true);
             try {
                 const response = await axios.get("http://localhost:5000/smartlist/homepage");
                 console.log(response.data);
@@ -42,9 +43,9 @@ function Homepage() {
             <Header statement={"These are your list of things to do"} expression={'.'}/>
             <NavigationBar show={true}/>
             <Body>
-                <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={false}/>
-                <StatusColumns status="Doing" tasks={doingTasks} deleteMode={false}/>
-                <StatusColumns status="Done" tasks={doneTasks} deleteMode={false}/>
+                <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={false} loading={loading}/>
+                <StatusColumns status="Doing" tasks={doingTasks} deleteMode={false} loading={loading}/>
+                <StatusColumns status="Done" tasks={doneTasks} deleteMode={false} loading={loading}/>
             </Body>
         </Background>
     )

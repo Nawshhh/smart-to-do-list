@@ -75,9 +75,9 @@ function DeleteTask() {
         />
         <NavigationBar show={false}/>
         <Body>
-            <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
-            <StatusColumns status="Doing" tasks={doingTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
-            <StatusColumns status="Done" tasks={doneTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
+            <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} loading={loading} />
+            <StatusColumns status="Doing" tasks={doingTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} loading={loading} />
+            <StatusColumns status="Done" tasks={doneTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} loading={loading} />
         </Body>
         <div className='flex flex-row w-auto h-auto mt-[53px]'>
             <Link to="/smartlist/homepage">

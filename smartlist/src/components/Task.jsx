@@ -44,7 +44,7 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
 
     return (
         <>
-            {view && <ViewTask />}
+            {view && <ViewTask task={task} setView={setView}/>}
             <div
                 onClick={handleClick}
                 className={`w-[467px] h-[82px] bg-[#080808] rounded-[10px] flex flex-row hover:bg-[#151515] 
