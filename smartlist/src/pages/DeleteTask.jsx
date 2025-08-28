@@ -73,7 +73,7 @@ function DeleteTask() {
             statement={"What will you remove"} 
             expression={'?'}
         />
-        <NavigationBar show={true}/>
+        <NavigationBar show={false}/>
         <Body>
             <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
             <StatusColumns status="Doing" tasks={doingTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
