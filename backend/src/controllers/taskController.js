@@ -4,7 +4,7 @@ import {promptMessage,systemPrompt} from "../config/utilities.js";
 
 export async function getAllTasks (req,res) {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find({status: req.params.status});
         res.status(200).json(tasks);
     } catch (error) {
         console.error("error in getAllTasks controller", error);
@@ -81,7 +81,6 @@ export async function deleteTask(req,res){
 }
 
 export async function generateTasks(req,res) {
-
     const { name,
         status,
         priority,

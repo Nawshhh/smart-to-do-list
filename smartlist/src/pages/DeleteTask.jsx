@@ -10,33 +10,8 @@ import { Link } from 'react-router';
 import toast from 'react-hot-toast';
 
 function DeleteTask() {
-    const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [clickedIds, setClickedIds] = useState([]);
-
-    useEffect(() => {
-        const fetchTasks = async () => {
-            setLoading(true);
-            try {
-                const response = await axios.get("http://localhost:5000/smartlist/homepage");
-                console.log(response.data);
-                setTasks(response.data);
-            } catch (error) {
-                console.error("Error fetching tasks:", error);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchTasks(); // call the function
-    },[]);
-
-    // 1 - to-do
-    // 2 - doing
-    // 3 - done
-
-    const toDoTasks = tasks.filter(task => task.status === 1);
-    const doingTasks = tasks.filter(task => task.status === 2);
-    const doneTasks = tasks.filter(task => task.status === 3);
 
     console.log("@ Delete Task");
 
@@ -76,9 +51,9 @@ function DeleteTask() {
         />
         <NavigationBar show={false}/>
         <Body>
-            <StatusColumns status="To-Do" tasks={toDoTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} loading={loading} />
-            <StatusColumns status="Doing" tasks={doingTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} loading={loading} />
-            <StatusColumns status="Done" tasks={doneTasks} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} loading={loading} />
+            <StatusColumns status="To-Do" deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
+            <StatusColumns status="Doing" deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
+            <StatusColumns status="Done" deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds}/>
         </Body>
         <div className='flex flex-row w-auto h-auto mt-[53px]'>
             <Link to="/smartlist/homepage">

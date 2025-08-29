@@ -3,7 +3,7 @@ import { createTask, deleteTask, generateTasks, getAllTasks, updateTask } from "
 
 const router = express.Router();
 
-router.get("/homepage", getAllTasks);
+router.get("/homepage/:status", getAllTasks);
 router.post("/add-task", createTask);
 router.put("/update-task/:id", updateTask);
 router.delete("/delete-task", deleteTask);

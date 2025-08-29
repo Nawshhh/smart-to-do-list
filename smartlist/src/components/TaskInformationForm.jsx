@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -115,7 +115,7 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
                         id="task_name" 
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className='w-full h-[48px] rounded-[5px] bg-[#757575] font-helvetica text-white font-normal px-[20px] py-[12px] 
+                        className='w-full h-[48px] rounded-[5px] bg-[#757575] font-helvetica text-white text-[20px] font-normal px-[20px] py-[12px] 
                         focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
                         placeholder='Enter Name'
                     />
@@ -202,7 +202,7 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
                         id="task_description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className='rounded-[5px] bg-[#757575] font-helvetica font-normal text-white min-h-[150px] max-h-h[150px] w-full resize-none px-[20px] py-[12px]
+                        className='rounded-[5px] bg-[#757575] font-helvetica font-normal text-white text-[20px] min-h-[150px] max-h-h[150px] w-full resize-none px-[20px] py-[12px]
                         focus:outline-none focus:ring-0 focus:caret-[#BDBDBD]'
                     ></textarea>
                 </div>

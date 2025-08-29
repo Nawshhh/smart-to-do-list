@@ -4,7 +4,7 @@ import { formatDate, formatTimeFromMilitary } from '../utilities/utils';
 
 function TaskName({name}) {
   return (
-    <span className='font-helvetica text-[25px] font-light text-white mt-[20px]'>{name}</span>
+    <span className='font-helvetica text-[25px] font-normal text-white mt-[20px]'>{name}</span>
   )
 }
 
@@ -55,7 +55,7 @@ function TaskTime({time}){
 
 function TaskDescription({description}){
   return(
-    <span className='flex flex-wrap font-helvetica text-[25px] font-light text-white mt-[20px] italic'>{description}</span>
+    <span className='flex flex-wrap font-helvetica text-[25px] font-normal text-white mt-[20px] italic'>{description}</span>
   )
 }
 
