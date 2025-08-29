@@ -76,7 +76,7 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
             const response = await axios.post('http://localhost:5000/smartlist/generate-tasks' , {
                 name, 
                 description,
-                status, 
+                status: 1, 
                 priority, 
                 completion_date: completionDate, 
                 completion_time: completionTime
@@ -129,7 +129,7 @@ function TaskInformationForm({setAiSuggestions, setIsGenerating, setGenerateAgai
                             type="text" 
                             name='task_status'
                             id='task_status'
-                            value={status}
+                            value="To Do"
                             readOnly
                             className='w-full h-[51px] rounded-[5px] bg-[#757575] font-helvetica text-white font-normal px-[20px] py-[12px] 
                             focus:outline-none focus:ring-0 focus:caret-[#BDBDBD] cursor-pointer'

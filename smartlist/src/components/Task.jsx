@@ -9,7 +9,7 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
     const priority = priorityMap[task.priority] ?? ""; 
 
     // color corresponding to priority
-    const bgMap = { 1: "bg-[#DE3D3D]", 2: " bg-[#C86C41]", 3: "bg-[#3BAD3B]" };
+    const bgMap = { 1: "bg-[#DE3D3D]", 2: " bg-[#DEDE3D]", 3: "bg-[#3DDE3D]" };
     const bgColor = bgMap[task.priority] ?? "";
 
     const bgStatusMap = {1: "bg-[#7e7e7e]", 2: "bg-[#FFD350]", 3: "bg-[#5EBA50]"};
@@ -47,7 +47,7 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
             {view && <ViewTask task={task} setView={setView}/>}
             <div
                 onClick={handleClick}
-                className={`w-[467px] h-[82px] bg-[#080808] rounded-[10px] flex flex-row hover:bg-[#151515] 
+                className={`w-[467px] h-[82px] bg-[#080808] rounded-[10px] flex flex-row hover:bg-[#151515] cursor-pointer 
                             ${toggleDelete ? deleteHover : ""}
                             ${clicked ? "outline outline-2 outline-[#DE3D3D]" : ""}`}
             >

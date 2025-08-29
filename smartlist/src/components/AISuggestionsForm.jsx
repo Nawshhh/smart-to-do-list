@@ -3,6 +3,7 @@ import Task from './Task'
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import toast from 'react-hot-toast';
+import LoadingIcon from '../assets/LoadingIcon';
 
 function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGenerateAgain }) {
   console.log("isGenerating State: ", isGenerating);
@@ -64,24 +65,30 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
         {/* outer container */}
         <div className='w-auto h-auto flex flex-row mt-[27px]'>
           {/* inner container */}
-          <div className='flex flex-col w-full h-auto gap-y-[15px]'>
-            {aiSuggestions.length > 0 ? (
-              aiSuggestions.map((suggestion, index) => (
-                <form key={index} className='flex items-center' onSubmit={(e) => addAiTask(e, index, suggestion)}>
-                  <Task key={index} task={suggestion}/>
-                  {loadingIndex === index ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
-                              <span className='font-helvetica text-[20px] text-white' disabled={loadingIndex === index}>Adding...</span>
-                            </button> 
-                  : (addedByIndex[index] ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
-                              <span className='font-helvetica text-[20px] text-white' disabled={addedByIndex[index]}>Added</span>
-                            </button>
-                  : <button type='submit' className='bg-[#d9d9d9] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px] hover:bg-[#B3B3B3]'>
-                    <span className='font-helvetica text-[20px] text-black'>Add</span>
-                  </button>)}
-                </form>
-              ))
-            ) : null}
+          {isGenerating ? 
+          <div className='flex items-center justify-center w-full mt-[200px]'>
+            <LoadingIcon/>
           </div>
+           : 
+            <div className='flex flex-col w-full h-auto gap-y-[15px]'>
+              {aiSuggestions.length > 0 ? (
+                aiSuggestions.map((suggestion, index) => (
+                  <form key={index} className='flex items-center' onSubmit={(e) => addAiTask(e, index, suggestion)}>
+                    <Task key={index} task={suggestion}/>
+                    {loadingIndex === index ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
+                                <span className='font-helvetica text-[20px] text-white' disabled={loadingIndex === index}>Adding...</span>
+                              </button> 
+                    : (addedByIndex[index] ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
+                                <span className='font-helvetica text-[20px] text-white' disabled={addedByIndex[index]}>Added</span>
+                              </button>
+                    : <button type='submit' className='bg-[#d9d9d9] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px] hover:bg-[#B3B3B3]'>
+                      <span className='font-helvetica text-[20px] text-black'>Add</span>
+                    </button>)}
+                  </form>
+                ))
+              ) : null}
+            </div>
+          }
         </div>
     </div>
   )

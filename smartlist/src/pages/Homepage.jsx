@@ -19,6 +19,7 @@ function Homepage() {
                 setTasks(response.data);
             } catch (error) {
                 console.error("Error fetching tasks:", error);
+                setLoading(true);
             } finally {
                 setLoading(false);
             }

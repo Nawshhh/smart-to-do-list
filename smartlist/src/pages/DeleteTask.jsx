@@ -11,11 +11,12 @@ import toast from 'react-hot-toast';
 
 function DeleteTask() {
     const [tasks, setTasks] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [clickedIds, setClickedIds] = useState([]);
 
     useEffect(() => {
         const fetchTasks = async () => {
+            setLoading(true);
             try {
                 const response = await axios.get("http://localhost:5000/smartlist/homepage");
                 console.log(response.data);
