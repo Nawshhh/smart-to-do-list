@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { formatDate } from '../utilities/utils.js';
 import ViewTask from './ViewTask.jsx';
+import SelectIcon from '../assets/SelectIcon.jsx';
 
-function Task({ task, toggleDelete, clicked, onToggle }) {
+function Task({ task, toggleDelete, clicked, onToggle, ...props }) {
     const [view, setView] = useState(false);
+    const [showSelected, setShowSelected] = useState(false);
     // priority
     const priorityMap = { 1: "High", 2: "Medium", 3: "Low" };
     const priority = priorityMap[task.priority] ?? ""; 
@@ -33,6 +35,7 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
 
     const handleClick = () => {
         if (toggleDelete){
+            setShowSelected(!showSelected);
             onToggle?.();
         } else {
             console.log("Clicked task: ", task.name);
@@ -43,12 +46,10 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
 
     return (
         <>
-            {view && <ViewTask task={task} setView={setView}/>}
+            {view && <ViewTask task={task} setView={setView} fromAi={props.fromAi}/>}
             <div
                 onClick={handleClick}
-                className={`w-[467px] h-[82px] bg-[#080808] rounded-[10px] flex flex-row hover:bg-[#151515] cursor-pointer 
-                            ${toggleDelete ? deleteHover : ""}
-                            ${clicked ? "outline outline-2 outline-[#DE3D3D]" : ""}`}
+                className={`w-[467px] h-[82px] bg-[#080808] rounded-[10px] flex flex-row hover:bg-[#151515] cursor-pointer `}
             >
                 <span className={`${bgStatus} h-auto w-[20px] rounded-l-[10px]`}></span>
                 <div className='w-full h-full pl-[15px] pr-[13px] py-[12px]'>
@@ -63,6 +64,7 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
                         </span>
                     </div>
                 </div>
+                {showSelected && toggleDelete ? <SelectIcon fillColor={"white"}/> : <></>}
             </div>
         </>
     )

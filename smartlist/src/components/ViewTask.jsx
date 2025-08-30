@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MinIcon from '../assets/MinIcon';
 import { formatDate, formatTimeFromMilitary } from '../utilities/utils';
+import axios from 'axios';
 
 function TaskName({name}) {
   return (
@@ -8,24 +9,81 @@ function TaskName({name}) {
   )
 }
 
-function TaskStatus({status}){
+function TaskStatus({initialStatus,taskId,...props}){
+  const [status, setStatus] = useState(initialStatus);
+  const [showUpdate, setShowUpdate] = useState(false);
+  
+  useEffect(() => {
+    console.log("Changed status to: ", status);
+    if (status !== initialStatus){
+      setShowUpdate(true);
+    } else {
+      setShowUpdate(false);
+    }
+  }, [status]);
+
+  const handleChangeStatus = async () => {
+    axios.put(`http://localhost:5000/smartlist/update-task-status/${taskId}`, {
+      status: status
+    })
+    .then(response => {
+      console.log("Task status updated successfully: ", response.data);
+      setShowUpdate(false);
+      // re render after updating
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error("Error updating task status: ", error);
+    }); 
+  }
+
   return (
-    <div className='flex flex-col mt-[10px] gap-y-[10px]'>
-      <div className='flex items-center'>
-         <input type="checkbox" className='mr-[20px] h-[20px] w-[20px] appearance-none border-2 border-white bg-transparent checked:bg-white rounded-[5px]'
-         checked={status == 1} disabled/>
-         <span className='font-helvetica text-[25px] font-light text-white'>To Do</span>
+    <div className="flex flex-col mt-[10px] gap-y-[10px]">
+      {/* To Do */}
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          checked={status === 1}
+          onChange={() => setStatus(1)}
+          disabled={props.fromAi} // disable if from AI suggestions
+          className="mr-[20px] h-[20px] w-[20px] appearance-none border-2 border-white bg-transparent checked:bg-white rounded-[5px]"
+        />
+        <span className="font-helvetica text-[25px] font-light text-white">
+          To Do
+        </span>
       </div>
-      <div className='flex items-center'>
-         <input type="checkbox" className='mr-[20px] h-[20px] w-[20px] appearance-none border-2 border-white bg-transparent checked:bg-white rounded-[5px]'
-         checked={status == 2} disabled/>
-         <span className='font-helvetica text-[25px] font-light text-white'>Doing</span>
+
+      {/* Doing */}
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          checked={status === 2}
+          onChange={() => setStatus(2)}
+          disabled={props.fromAi} 
+          className="mr-[20px] h-[20px] w-[20px] appearance-none border-2 border-white bg-transparent checked:bg-white rounded-[5px]"
+        />
+        <span className="font-helvetica text-[25px] font-light text-white">
+          Doing
+        </span>
       </div>
-      <div className='flex items-center'>
-         <input type="checkbox" className='mr-[20px] h-[20px] w-[20px] appearance-none border-2 border-white bg-transparent checked:bg-white rounded-[5px]'
-         checked={status == 3} disabled/>
-         <span className='font-helvetica text-[25px] font-light text-white'>Done</span>
+
+      {/* Done */}
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          checked={status === 3}
+          onChange={() => setStatus(3)}
+          disabled={props.fromAi} 
+          className="mr-[20px] h-[20px] w-[20px] appearance-none border-2 border-white bg-transparent checked:bg-white rounded-[5px]"
+        />
+        <span className="font-helvetica text-[25px] font-light text-white">
+          Done
+        </span>
       </div>
+      {showUpdate && 
+        <button type="button" onClick={handleChangeStatus}
+        className='bg-white font-helvetica text-[20px] text-black rounded-[5px] w-[118px] h-[40px] mt-[100px] hover:bg-[#DFDFDF]'>Update</button>
+      }
     </div>
   )
 }
@@ -60,7 +118,7 @@ function TaskDescription({description}){
 }
 
 
-function ViewTask({task,setView}) {
+function ViewTask({task,setView,...props}) {
   const [isVisible, setIsVisible] = useState(false);
   const [clickedOption, setClickedOption] = useState([true,false,false,false,false,false]);
 
@@ -133,7 +191,7 @@ function ViewTask({task,setView}) {
               <span className='font-helvetica text-[30px] font-bold text-white'>
                 {clickedOption[0] ? "Name" : clickedOption[1] ? "Status" : clickedOption[2] ? "Priority" : clickedOption[3] ? "Date" : clickedOption[4] ? "Time" : "Description"}
               </span>
-                {clickedOption[0] ? <TaskName name={task.name}/> : clickedOption[1] ? <TaskStatus status={task.status}/>: clickedOption[2] ? <TaskPriority priority={task.priority}/> : 
+                {clickedOption[0] ? <TaskName name={task.name}/> : clickedOption[1] ? <TaskStatus initialStatus={task.status} taskId={task._id} fromAi={props.fromAi}/>: clickedOption[2] ? <TaskPriority priority={task.priority}/> : 
                 clickedOption[3] ? <TaskDate date={task?.completion_date}/> : clickedOption[4] ? <TaskTime time={task?.completion_time}/> : <TaskDescription description={task.description}/>}
             </div>
           </div>

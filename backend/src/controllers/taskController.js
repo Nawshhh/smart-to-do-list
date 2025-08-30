@@ -115,3 +115,14 @@ export async function generateTasks(req,res) {
         res.status(500).json({message: "error generating"});
     }
 }
+
+export async function updateTaskStatus(req,res){
+    try {
+        const { status } = req.body;
+        await Task.findByIdAndUpdate(req.params.id, { status });
+        res.status(200).json({message: "task status updated successfully"});
+    } catch (error) {
+        console.error("error in updateTaskStatus controller", error);
+        res.status(500).json({message: "error update status"});
+    }
+}

@@ -74,7 +74,7 @@ function AISuggestionsForm({ aiSuggestions, isGenerating, generateAgain, setGene
               {aiSuggestions.length > 0 ? (
                 aiSuggestions.map((suggestion, index) => (
                   <form key={index} className='flex items-center' onSubmit={(e) => addAiTask(e, index, suggestion)}>
-                    <Task key={index} task={suggestion}/>
+                    <Task key={index} task={suggestion} fromAi={true}/>
                     {loadingIndex === index ? <button type='button' className='bg-[#757575] h-[40px] w-[118px] rounded-[5px] inline-flex items-center justify-center ml-[29px]'>
                                 <span className='font-helvetica text-[20px] text-white' disabled={loadingIndex === index}>Adding...</span>
                               </button> 

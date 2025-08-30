@@ -43,6 +43,12 @@ function DeleteTask() {
         } 
     }
 
+    const COLUMNS = [
+        { name: "To-Do", id: 1 },
+        { name: "Doing", id: 2 },
+        { name: "Done", id: 3 }
+    ]
+
   return (
     <Background>
         <Header
@@ -51,17 +57,17 @@ function DeleteTask() {
         />
         <NavigationBar show={false}/>
         <Body>
-            <StatusColumns status="To-Do" deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} renderAgain={render}/>
-            <StatusColumns status="Doing" deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} renderAgain={render}/>
-            <StatusColumns status="Done" deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} renderAgain={render}/>
+            {COLUMNS.map(column => {
+                return <StatusColumns key={column.id} status={column.name} deleteMode={true} clickedIds={clickedIds} setClickedIds={setClickedIds} renderAgain={render}/>
+            })}
         </Body>
         <div className='flex flex-row w-auto h-auto mt-[53px]'>
             <Link to="/smartlist/homepage">
                 <button type="button"
-                    className=' bg-white font-helvetica text-[20px] text-black rounded-[5px] w-[118px] h-[40px] hover:bg-[#DFDFDF]'>Home</button>
+                    className=' bg-[#888888] font-helvetica text-[20px] text-white rounded-[5px] w-[118px] h-[40px] hover:bg-[#6d6d6d]'>Home</button>
             </Link>
             <button type="button" onClick={handleDelete}
-                    className='ml-[18px] bg-[#DE3D3D] font-helvetica text-[20px] text-white rounded-[5px] w-[118px] h-[40px] hover:bg-[#C83737]'>Delete</button>
+                    className='ml-[18px] bg-[#c83737] font-helvetica text-[20px] text-white rounded-[5px] w-[118px] h-[40px] hover:bg-[#a82d2d]'>Delete</button>
         </div>
     </Background>
   )

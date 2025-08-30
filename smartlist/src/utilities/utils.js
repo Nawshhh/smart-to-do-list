@@ -41,3 +41,7 @@ export function formatTimeFromMilitary(time) {
     return `${hours}:${minutes} ${period}`;
 }
 
+export function sortTasksByPriority(tasks) {
+    return tasks.sort((a, b) => a.priority - b.priority);
+}
+
