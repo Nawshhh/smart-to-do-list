@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useState } from 'react'
 import { formatDate } from '../utilities/utils.js';
 import ViewTask from './ViewTask.jsx';
 
@@ -58,7 +58,7 @@ function Task({ task, toggleDelete, clicked, onToggle }) {
                             <p className='font-helvetica font-normal text-[#ADADAD] text-[14px] '>Complete by: {formattedDate}</p>
                             <p className='font-helvetica font-normal text-[#ADADAD] text-[14px] ml-[10px]'>|</p>
                             <div className={`px-[px] inline-flex items-center justify-center w-[50px] h-[18px]  rounded-[15px] ml-[12px] ${bgColor}`}>
-                                <p className='font-helvetica font-regular text-white text-[10px]'>{priority}</p>
+                                <p className='font-helvetica font-regular text-black text-[10px]'>{priority}</p>
                             </div>
                         </span>
                     </div>

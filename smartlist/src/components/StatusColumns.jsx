@@ -1,9 +1,6 @@
-import React from 'react'
 import Task from './Task'
 import { useState, useEffect } from 'react';
 import LoadingIcon from '../assets/LoadingIcon';
-import {useDroppable} from '@dnd-kit/core';
-import {DndContext} from '@dnd-kit/core';
 import axios from 'axios';
 
 function StatusColumns({status, deleteMode = false ,clickedIds = [], setClickedIds, ...props}) {
@@ -13,25 +10,27 @@ function StatusColumns({status, deleteMode = false ,clickedIds = [], setClickedI
 
   console.log("List of IDs: ", clickedIds);
 
-  useEffect(() => {
-      const fetchTasks = async () => {
-          setLoading(true);
-          try {
-            const statusNumber = status == "To-Do" ?  1 : status == "Doing" ? 2 : 3;
-            const response = await axios.get(`http://localhost:5000/smartlist/homepage/${statusNumber}`);
-            const allTasks = response.data;
-            console.log(`Fetched Tasks for ${statusNumber}: `, allTasks);
-            setTasks(allTasks);
-          } catch (error) {
-            setLoading(true);
-            console.error("Error fetching tasks:", error);
-          } finally {
-            setLoading(false);
-          }
+  
+  const fetchTasks = async () => {
+      setLoading(true);
+      try {
+        const statusNumber = status == "To-Do" ?  1 : status == "Doing" ? 2 : 3;
+        const response = await axios.get(`http://localhost:5000/smartlist/homepage/${statusNumber}`);
+        const allTasks = response.data;
+        console.log(`Fetched Tasks for ${statusNumber}: `, allTasks);
+        setTasks(allTasks);
+      } catch (error) {
+        setLoading(true);
+        console.error("Error fetching tasks:", error);
+      } finally {
+        setLoading(false);
       }
-      fetchTasks(); // call the function
-  },[]);
+  }
 
+  useEffect(() => {
+    console.log("Render Again: ", props.renderAgain);
+      fetchTasks(); // call the function
+  }, [props.renderAgain]);
 
   const toggleClicked = (id) => {
     if (!deleteMode) {
