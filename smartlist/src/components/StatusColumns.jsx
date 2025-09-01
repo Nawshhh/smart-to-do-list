@@ -49,9 +49,9 @@ function StatusColumns({status, deleteMode = false ,clickedIds = [], setClickedI
 
   return (
     <>
-      <div className='max-h-[768px] max-w-[500px]'>
+      <div className='max-h-[768px] max-w-full'>
           <p className='font-helvetica font-bold text-[30px] text-white mb-[10px]'>{status}</p>
-          <div className='w-[500px] h-[720px] bg-[#545454] rounded-[20px] flex flex-col items-center py-[18px] gap-y-[20px] overflow-auto scrollbar-none'>
+          <div className='w-[500px] h-[720px] bg-[#545454] rounded-[20px] flex flex-col items-center py-[18px] gap-y-[20px] overflow-auto overflow-x-auto scrollbar-none'>
             {loading && <LoadingIcon />}
               {tasks?.map(task => {
                   return <Task

@@ -13,5 +13,5 @@ export default {
       textColor: ['autofill'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 }

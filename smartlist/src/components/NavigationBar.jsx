@@ -15,8 +15,8 @@ function NavigationBar({ show = true, ...props }) {
                 <span className='group'>
                     <Link to="/smartlist/delete-task">
                         <button id="delete-task" 
-                                className=' group-hover:bg-[#D9D9D9] h-[56px] w-[170px] flex items-center justify-center bg-[#545454] rounded-b-[20px]'>
-                            <p className='font-helvetica font-bold text-[25px] text-[#D9D9D9] group-hover:text-[#212121]'>Delete</p>
+                                className=' group-hover:bg-[#D9D9D9] px-[40px] py-[10px] bg-[#545454] rounded-b-[20px]'>
+                            <p className='font-helvetica font-bold text-lg lg:text-2xl sm:text-lg text-[#D9D9D9] group-hover:text-[#212121]'>Delete</p>
                         </button>
                     </Link>
                 </span>
@@ -24,8 +24,8 @@ function NavigationBar({ show = true, ...props }) {
                 <span className='group'>
                     <Link to="/smartlist/add-task">
                         <button id="add-task" 
-                        className='group-hover:bg-[#D9D9D9] h-[56px] w-[170px] flex items-center justify-center bg-[#545454] rounded-b-[20px]'>
-                            <p className='font-helvetica font-bold text-[25px] text-[#D9D9D9] group-hover:text-[#212121]'>Add Task</p>
+                        className='group-hover:bg-[#D9D9D9] px-[40px] py-[10px] bg-[#545454] rounded-b-[20px]'>
+                            <p className='font-helvetica font-bold text-lg lg:text-2xl sm:text-lg text-[#D9D9D9] group-hover:text-[#212121]'>Add Task</p>
                         </button>
                     </Link>
                 </span>
